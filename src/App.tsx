@@ -1,5 +1,5 @@
 import "./App.css";
-import GoldClicker from "./components/GoldClicler";
+import GoldClicker from "./components/GoldClicker";
 
 function App() {
 	return (

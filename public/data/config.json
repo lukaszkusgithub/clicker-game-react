@@ -1,0 +1,24 @@
+{
+	"autoClicker": {
+		"powerCostFactor": 10,
+		"timeReductionCostFactor": 10,
+		"timeReductionAmount": 10,
+		"costFactor": 10,
+		"powerAmount": 1
+	},
+	"click": {
+		"costFactor": 10,
+		"powerAmount": 1
+	},
+	"initialValues": {
+		"gold": 50,
+		"clickPower": 1,
+		"autoClickPower": 1,
+		"clickUpgradeCost": 10,
+		"autoClickerCost": 10,
+		"autoClickers": 0,
+		"timeDecreaseCost": 10,
+		"autoClickerTime": 1000,
+		"autoClickerPowerCost": 10
+	}
+}
