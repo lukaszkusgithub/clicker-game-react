@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
 import "./GoldClicker.scss";
 import { Config } from "../types/Config";
+import { useEffect, useState } from "react";
 function GoldClicker() {
-	const [gold, setGold] = useState(0);
-	const [clickPower, setClickPower] = useState(0);
-	const [clickUpgradeCost, setClickUpgradeCost] = useState(0);
-	const [autoClickerCost, setAutoClickerCost] = useState(0);
-	const [autoClickers, setAutoClickers] = useState(0);
-	const [timeDecreaseCost, setTimeDecreaseCost] = useState(0);
-	const [autoClickerTime, setAutoClickerTime] = useState(0);
-	const [autoClickerPowerCost, setAutoClickerPowerCost] = useState(0);
-	const [autoClickerPower, setAutoClickerPower] = useState(0);
+	const [gold, setGold] = useState<number>(0);
+	const [clickPower, setClickPower] = useState<number>(0);
+	const [clickUpgradeCost, setClickUpgradeCost] = useState<number>(0);
+	const [autoClickerCost, setAutoClickerCost] = useState<number>(0);
+	const [autoClickers, setAutoClickers] = useState<number>(0);
+	const [timeDecreaseCost, setTimeDecreaseCost] = useState<number>(0);
+	const [autoClickerTime, setAutoClickerTime] = useState<number>(0);
+	const [autoClickerPowerCost, setAutoClickerPowerCost] = useState<number>(0);
+	const [autoClickerPower, setAutoClickerPower] = useState<number>(0);
 	const [config, setConfig] = useState<Config | null>(null);
 
 	useEffect(() => {
@@ -42,7 +42,8 @@ function GoldClicker() {
 		const interval = setInterval(() => {
 			if (autoClickers > 0) {
 				setGold(
-					(prevGold) => prevGold + autoClickers * autoClickerPower
+					(prevGold: number) =>
+						prevGold + autoClickers * autoClickerPower
 				);
 			}
 		}, autoClickerTime);
@@ -66,12 +67,12 @@ function GoldClicker() {
 
 	const upgradeClickPower = () => {
 		if (gold >= clickUpgradeCost) {
-			setGold((prevGold) => prevGold - clickUpgradeCost);
+			setGold((prevGold: number) => prevGold - clickUpgradeCost);
 			setClickPower(
-				(prevClickPower) => prevClickPower + clickPowerAmount
+				(prevClickPower: number) => prevClickPower + clickPowerAmount
 			);
 			setClickUpgradeCost(
-				(prevClickUpgradeCost) =>
+				(prevClickUpgradeCost: number) =>
 					prevClickUpgradeCost * clickPowerCostFactor
 			);
 		}
@@ -79,10 +80,10 @@ function GoldClicker() {
 
 	const buyAutoClicker = () => {
 		if (gold >= autoClickerCost) {
-			setGold((prevGold) => prevGold - autoClickerCost);
-			setAutoClickers((prevAutoClickers) => prevAutoClickers + 1);
+			setGold((prevGold: number) => prevGold - autoClickerCost);
+			setAutoClickers((prevAutoClickers: number) => prevAutoClickers + 1);
 			setAutoClickerCost(
-				(prevAutoClickerCost) =>
+				(prevAutoClickerCost: number) =>
 					prevAutoClickerCost * autoClickerCostFactor
 			);
 		}
@@ -90,13 +91,13 @@ function GoldClicker() {
 
 	const decreaseAutoClickerTime = () => {
 		if (gold >= timeDecreaseCost && autoClickers > 0) {
-			setGold((prevGold) => prevGold - timeDecreaseCost);
+			setGold((prevGold: number) => prevGold - timeDecreaseCost);
 			console.log(autoClickerTimeDecreaseAmount);
 			setAutoClickerTime(
-				(prevTime) => prevTime - autoClickerTimeDecreaseAmount
+				(prevTime: number) => prevTime - autoClickerTimeDecreaseAmount
 			);
 			setTimeDecreaseCost(
-				(prevTimeDecreaseCost) =>
+				(prevTimeDecreaseCost: number) =>
 					prevTimeDecreaseCost * autoClickerTimeReductionCostFactor
 			);
 		}
@@ -104,12 +105,12 @@ function GoldClicker() {
 
 	const increaseAutoClickerPower = () => {
 		if (gold >= autoClickerPowerCost && autoClickers > 0) {
-			setGold((prevGold) => prevGold - autoClickerPowerCost);
+			setGold((prevGold: number) => prevGold - autoClickerPowerCost);
 			setAutoClickerPowerCost(
-				(prevCost) => prevCost + autoClickerPowerCostFactor
+				(prevCost: number) => prevCost + autoClickerPowerCostFactor
 			);
 			setAutoClickerPower(
-				(prevPower) => prevPower + autoClickerPowerAmount
+				(prevPower: number) => prevPower + autoClickerPowerAmount
 			);
 		}
 	};
