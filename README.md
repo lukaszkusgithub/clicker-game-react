@@ -77,41 +77,6 @@ Here's an example of the `config.json` format:
 
 The game mechanics can be adjusted by editing this configuration.
 
-## ESLint Configuration
-
-This project uses ESLint for code quality and linting. You can expand the ESLint configuration for type-aware linting by following these steps:
-
-1. Update the `parserOptions` property to include your TypeScript configuration files:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-2. Replace `tseslint.configs.recommended` with `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`.
-3. Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and configure it in your ESLint setup:
-
-```js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    react,
-  },
-  rules: {
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-
 ## Contributing
 
 Feel free to fork this repository and submit pull requests. If you'd like to contribute, make sure to follow the code style and ensure tests pass.
