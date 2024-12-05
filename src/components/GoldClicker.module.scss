@@ -29,16 +29,7 @@ button {
 	width: 100%;
 	align-items: center;
 	gap: 0.5rem;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
 	text-align: center;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	border-radius: 8px;
-	border: 1px solid transparent;
-	transition: border-color 0.25s;
 
 	&:hover {
 		border-color: #646cff;
@@ -46,6 +37,10 @@ button {
 
 	&:disabled {
 		background-color: #010101;
+		cursor: not-allowed;
+	}
+	[data-theme="light"] &:disabled {
+		background-color: #565656;
 		cursor: not-allowed;
 	}
 }

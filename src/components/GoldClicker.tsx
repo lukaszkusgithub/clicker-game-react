@@ -1,5 +1,5 @@
 import styles from "./GoldClicker.module.scss";
-import { Config } from "../types/Config";
+import { Config } from "../types/Config.type";
 import { useEffect, useState } from "react";
 import { Coins, Cpu, Pickaxe, Timer } from "lucide-react";
 import AnimatedValue from "./functional/AnimatedValue";
