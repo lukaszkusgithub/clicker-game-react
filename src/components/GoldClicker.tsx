@@ -1,4 +1,4 @@
-import "./GoldClicker.scss";
+import styles from "./GoldClicker.module.scss";
 import { Config } from "../types/Config";
 import { useEffect, useState } from "react";
 import { Coins, Cpu, Pickaxe, Timer } from "lucide-react";
@@ -123,61 +123,61 @@ function GoldClicker() {
 	return (
 		<div>
 			<h1>Gold Clicker</h1>
-			<div className="textContainers">
-				<Coins className="icon" />
+			<div className={styles.textContainer}>
+				<Coins className={styles.icon} />
 				<p>
 					Gold: <AnimatedValue value={gold} />
 				</p>
 			</div>
-			<div className="textContainers">
-				<Pickaxe className="icon" />
+			<div className={styles.textContainer}>
+				<Pickaxe className={styles.icon} />
 				<p>
 					Click power: <AnimatedValue value={clickPower} />
 				</p>
 			</div>
-			<div className="textContainers">
-				<Cpu className="icon" />
+			<div className={styles.textContainer}>
+				<Cpu className={styles.icon} />
 				<p>
 					Auto-Clickers: <AnimatedValue value={autoClickers} />
 				</p>
 			</div>
-			<div className="textContainers">
-				<Timer className="icon" />
+			<div className={styles.textContainer}>
+				<Timer className={styles.icon} />
 				<p>
 					Auto-Clickers Time:{" "}
 					<AnimatedValue value={autoClickerTime / 1000} />s
 				</p>
 			</div>
-			<div className="textContainers">
-				<Pickaxe className="icon" />
+			<div className={styles.textContainer}>
+				<Pickaxe className={styles.icon} />
 				<p>
 					Auto-Clickers Power:{" "}
 					<AnimatedValue value={autoClickerPower} />
 				</p>
 			</div>
 
-			<div className="buttons-container">
+			<div className={styles.buttonsContainer}>
 				<motion.button
 					{...scaleOnHover}
 					onClick={() =>
 						setGold((prevGold) => prevGold + clickPower)
 					}>
-					<Coins className="icon" /> Dig gold
+					<Coins className={styles.icon} /> Dig gold
 				</motion.button>
 
 				<motion.button
 					{...scaleOnHover}
 					disabled={gold < clickUpgradeCost}
 					onClick={upgradeClickPower}>
-					<Pickaxe className="icon" /> Upgrade click power (Cost:{" "}
-					{clickUpgradeCost})
+					<Pickaxe className={styles.icon} /> Upgrade click power
+					(Cost: {clickUpgradeCost})
 				</motion.button>
 
 				<motion.button
 					{...scaleOnHover}
 					disabled={gold < autoClickerCost}
 					onClick={buyAutoClicker}>
-					<Cpu className="icon" />
+					<Cpu className={styles.icon} />
 					Buy Auto-clicker (Cost: {autoClickerCost})
 				</motion.button>
 
@@ -185,7 +185,7 @@ function GoldClicker() {
 					{...scaleOnHover}
 					disabled={gold < timeDecreaseCost || autoClickers === 0}
 					onClick={decreaseAutoClickerTime}>
-					<Timer className="icon" />
+					<Timer className={styles.icon} />
 					Decrease Auto-clicker Time (Cost: {timeDecreaseCost})
 				</motion.button>
 
@@ -193,7 +193,7 @@ function GoldClicker() {
 					{...scaleOnHover}
 					disabled={gold < autoClickerPowerCost || autoClickers === 0}
 					onClick={increaseAutoClickerPower}>
-					<Pickaxe className="icon" />
+					<Pickaxe className={styles.icon} />
 					Increase Auto-clicker Power (Cost: {autoClickerPowerCost})
 				</motion.button>
 			</div>
