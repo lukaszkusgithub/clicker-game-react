@@ -1,47 +1,86 @@
 import styles from "./GoldClicker.module.scss";
 import { Config } from "../types/Config.type";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Coins, Cpu, Pickaxe, Timer } from "lucide-react";
 import AnimatedValue from "./functional/AnimatedValue";
 import { motion } from "framer-motion";
 import { scaleOnHover } from "./utils/animations";
+import useLocalStorageState from "use-local-storage-state";
 
 function GoldClicker() {
-	const [gold, setGold] = useState<number>(0);
-	const [clickPower, setClickPower] = useState<number>(0);
-	const [clickUpgradeCost, setClickUpgradeCost] = useState<number>(0);
-	const [autoClickerCost, setAutoClickerCost] = useState<number>(0);
-	const [autoClickers, setAutoClickers] = useState<number>(0);
-	const [timeDecreaseCost, setTimeDecreaseCost] = useState<number>(0);
-	const [autoClickerTime, setAutoClickerTime] = useState<number>(0);
-	const [autoClickerPowerCost, setAutoClickerPowerCost] = useState<number>(0);
-	const [autoClickerPower, setAutoClickerPower] = useState<number>(0);
-	const [config, setConfig] = useState<Config | null>(null);
+	const [gold, setGold] = useLocalStorageState<number>("gold", {
+		defaultValue: 0,
+	});
+	const [clickPower, setClickPower] = useLocalStorageState<number>(
+		"clickPower",
+		{ defaultValue: 0 }
+	);
+	const [clickUpgradeCost, setClickUpgradeCost] =
+		useLocalStorageState<number>("clickUpgradeCost", { defaultValue: 0 });
+	const [autoClickerCost, setAutoClickerCost] = useLocalStorageState<number>(
+		"autoClickerCost",
+		{ defaultValue: 0 }
+	);
+	const [autoClickers, setAutoClickers] = useLocalStorageState<number>(
+		"autoClickers",
+		{ defaultValue: 0 }
+	);
+	const [timeDecreaseCost, setTimeDecreaseCost] =
+		useLocalStorageState<number>("timeDecreaseCost", { defaultValue: 0 });
+	const [autoClickerTime, setAutoClickerTime] = useLocalStorageState<number>(
+		"autoClickerTime",
+		{ defaultValue: 0 }
+	);
+	const [autoClickerPowerCost, setAutoClickerPowerCost] =
+		useLocalStorageState<number>("autoClickerPowerCost", {
+			defaultValue: 0,
+		});
+	const [autoClickerPower, setAutoClickerPower] =
+		useLocalStorageState<number>("autoClickerPower", { defaultValue: 0 });
+	const [config, setConfig] = useLocalStorageState<Config | null>("config", {
+		defaultValue: null,
+	});
 
 	useEffect(() => {
-		fetch("/data/config.json")
-			.then((response) => response.json())
-			.then((config) => {
-				setConfig(config);
-				setGold(config.initialValues.gold);
-				setClickPower(config.initialValues.clickPower);
-				setClickUpgradeCost(config.initialValues.clickUpgradeCost);
-				setAutoClickerCost(config.initialValues.autoClickerCost);
-				setAutoClickers(config.initialValues.autoClickers);
-				setAutoClickerPower(config.initialValues.autoClickPower);
-				setTimeDecreaseCost(config.initialValues.timeDecreaseCost);
-				setAutoClickerTime(config.initialValues.autoClickerTime);
-				setAutoClickerPowerCost(
-					config.initialValues.autoClickerPowerCost
+		if (
+			gold === 0 &&
+			clickPower === 0 &&
+			clickUpgradeCost === 0 &&
+			autoClickerCost === 0 &&
+			autoClickers === 0 &&
+			timeDecreaseCost === 0 &&
+			autoClickerTime === 0 &&
+			autoClickerPowerCost === 0 &&
+			autoClickerPower === 0
+		) {
+			fetch("/data/config.json")
+				.then((response) => response.json())
+				.then((config) => {
+					setConfig(config);
+					setGold(config.initialValues.gold);
+					setClickPower(config.initialValues.clickPower);
+					setClickUpgradeCost(config.initialValues.clickUpgradeCost);
+					setAutoClickerCost(config.initialValues.autoClickerCost);
+					setAutoClickers(config.initialValues.autoClickers);
+					setAutoClickerPower(config.initialValues.autoClickPower);
+					setTimeDecreaseCost(config.initialValues.timeDecreaseCost);
+					setAutoClickerTime(config.initialValues.autoClickerTime);
+					setAutoClickerPowerCost(
+						config.initialValues.autoClickerPowerCost
+					);
+				})
+				.catch((error) =>
+					console.error(
+						"Error when loading the configuration file:",
+						error
+					)
 				);
-			})
-			.catch((error) =>
-				console.error(
-					"Error when loading the configuration file:",
-					error
-				)
-			);
+		}
 	}, []);
+
+	if (config === null) {
+		return <p>Loading configuration...</p>;
+	}
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -54,10 +93,6 @@ function GoldClicker() {
 		}, autoClickerTime);
 		return () => clearInterval(interval);
 	}, [autoClickers, autoClickerTime, autoClickerPower]);
-
-	if (config === null) {
-		return <p>Loading configuration...</p>;
-	}
 
 	const autoClickerPowerCostFactor = config.autoClicker.powerCostFactor;
 	const autoClickerTimeReductionCostFactor =
