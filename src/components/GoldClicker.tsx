@@ -81,7 +81,6 @@ function GoldClicker() {
 	if (config === null) {
 		return <p>Loading configuration...</p>;
 	}
-
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (autoClickers > 0) {

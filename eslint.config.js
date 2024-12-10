@@ -23,9 +23,9 @@ export default [
 			"@typescript-eslint": tseslint,
 		},
 		rules: {
-			...tseslint.configs.recommended.rules, // Typowe zasady TypeScript z weryfikacją typów
-			"@typescript-eslint/explicit-module-boundary-types": "off", // Wyłączamy regułę dotyczącą typów w metodach
-			"@typescript-eslint/no-explicit-any": "warn", // Ostrzeżenie dla `any`
+			...tseslint.configs.recommended.rules,
+			"@typescript-eslint/explicit-module-boundary-types": "off",
+			"@typescript-eslint/no-explicit-any": "warn",
 		},
 	},
 
@@ -36,12 +36,12 @@ export default [
 		},
 		settings: {
 			react: {
-				version: "detect", // Automatycznie wykrywa wersję Reacta
+				version: "detect",
 			},
 		},
 		rules: {
-			...reactPlugin.configs.recommended.rules, // Zalecane reguły dla Reacta
-			...reactPlugin.configs["jsx-runtime"].rules, // Obsługuje JSX Runtime (React 17+)
+			...reactPlugin.configs.recommended.rules,
+			...reactPlugin.configs["jsx-runtime"].rules,
 		},
 	},
 ];
