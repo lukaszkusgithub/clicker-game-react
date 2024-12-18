@@ -1,12 +1,11 @@
-import { Linter } from "eslint";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import reactPlugin from "eslint-plugin-react";
 
-/** @type {Linter.FlatConfig[]} */
+/** @type {import('eslint').Linter.Config[]} */
 export default [
 	{
-		files: ["**/*.{js,mjs,cjs,ts,tsx}"],
+		files: ["src/**/*.{js,mjs,cjs,ts,tsx}"],
 		languageOptions: {
 			parser: typescriptParser,
 			parserOptions: {
